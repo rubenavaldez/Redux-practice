@@ -1,44 +1,34 @@
 import React, {Component} from 'react'
-import axios from 'axios'
+import {connect} from 'react-redux'
+import {fetchPosts} from '../actions/postActions'
+
 class Post extends Component{
-    constructor(props){
-        super(props);
-        this.state={
-            posts:[]
-        }
-    }
+componentWillMount(){
+    // fetch posts imported as a prop
+    this.props.fetchPosts()
+}
 
-    componentWillMount(){
-        // place holder API
-        axios.get('https://jsonplaceholder.typicode.com/posts')
-        .then(response =>{
-         console.log(response.data)
-            this.setState({posts:response.data})
-        })
-        .catch(err=>console.log("error ", err))
-        console.log('hello')
-
-    }
     render(){
-        const postItems = this.state.posts.map(post =>{
-            console.log(post)
-           return( <div key={post.id}>
-                <h3>{post.title}</h3>
-                <p>{post.body}</p>
-            </div>
-           )
-        })
-        console.log(postItems)
+
+        // const postItems = this.state.posts.map(post =>{
+        //     console.log(post)
+        //    return( <div key={post.id}>
+        //         <h3>{post.title}</h3>
+        //         <p>{post.body}</p>
+        //     </div>
+        //    )
+        // })
+        // console.log(postItems)
         return(
 
             <div>
                 <h1>Posts</h1>
-                {postItems}
+                {/* {postItems} */}
             </div>
         )
     }
 
 }
 
-
-export default Post;
+//                          map state to properties
+export default connect(null, {fetchPosts})(Post);

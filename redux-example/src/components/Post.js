@@ -12,7 +12,7 @@ class Post extends Component{
         // place holder API
         axios.get('https://jsonplaceholder.typicode.com/posts')
         .then(response =>{
-            // console.log(response.data)
+         console.log(response.data)
             this.setState({posts:response.data})
         })
         .catch(err=>console.log("error ", err))
@@ -21,6 +21,7 @@ class Post extends Component{
     }
     render(){
         const postItems = this.state.posts.map(post =>{
+            console.log(post)
            return( <div key={post.id}>
                 <h3>{post.title}</h3>
                 <p>{post.body}</p>
